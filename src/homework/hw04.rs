@@ -1,19 +1,41 @@
-const WIDTH: usize = 9;
-const HEIGHT: usize = 5;
+fn main() {
+    // Розміри конверта
+    const W: usize = 30; // ширина
+    const H: usize = 15; // висота
 
-pub fn draw_envelope() {
-    let mut output = String::new();
-
-    for y in 0..HEIGHT {
-        for x in 0..WIDTH {
-            if y == 0  y == HEIGHT - 1  x == 0  x == WIDTH - 1  x == y * (WIDTH - 1) / (HEIGHT - 1) || x == (HEIGHT - 1 - y) * (WIDTH - 1) / (HEIGHT - 1) {
-                output.push('*');
-            } else {
-                output.push(' ');
-            }
-        }
-        output.push('\n');
+    // Перевірка на валідність розміру
+    if W < 10 || W > 80 || H < 10 || H > 80 {
+        println!("Розміри повинні бути в діапазоні від 10 до 80!");
+        return;
     }
 
-    print!("{}", output);
+    // Малюємо верхню частину конверту
+    for i in 0..H / 2 {
+        for j in 0..W {
+            if j == i || j == W - i - 1 {
+                print!("*");
+            } else {
+                print!(" ");
+            }
+        }
+        println!();
+    }
+
+    // Малюємо середину конверту (тіло)
+    for _ in 0..W {
+        print!("*");
+    }
+    println!();
+
+    // Малюємо нижню частину конверту
+    for i in (0..H / 2).rev() {
+        for j in 0..W {
+            if j == i || j == W - i - 1 {
+                print!("*");
+            } else {
+                print!(" ");
+            }
+        }
+        println!();
+    }
 }
