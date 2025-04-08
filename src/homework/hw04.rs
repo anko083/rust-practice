@@ -1,45 +1,19 @@
-fn main() {
-    const W: usize = 21; // Ширина ромба (має бути непарною для коректного вигляду)
-    const H: usize = 11; // Висота ромба
+const WIDTH: usize = 9;
+const HEIGHT: usize = 5;
 
-    // Перевірка на валідність розміру
-    if W < 10 || W > 80 || H < 10 || H > 80 {
-        println!("Розміри повинні бути в діапазоні від 10 до 80!");
-        return;
-    }
+pub fn draw_envelope() {
+    let mut output = String::new();
 
-    let mut result = String::new();
-
-    // Малюємо верхню частину ромба
-    for i in 0..H / 2 {
-        for j in 0..W {
-            if j == (W / 2 - i) || j == (W / 2 + i) {
-                result.push('*');
+    for y in 0..HEIGHT {
+        for x in 0..WIDTH {
+            if y == 0  y == HEIGHT - 1  x == 0  x == WIDTH - 1  x == y * (WIDTH - 1) / (HEIGHT - 1) || x == (HEIGHT - 1 - y) * (WIDTH - 1) / (HEIGHT - 1) {
+                output.push('*');
             } else {
-                result.push(' ');
+                output.push(' ');
             }
         }
-        result.push('\n');
+        output.push('\n');
     }
 
-    // Малюємо середину ромба
-    for j in 0..W {
-        result.push('*');
-    }
-    result.push('\n');
-
-    // Малюємо нижню частину ромба
-    for i in (0..H / 2).rev() {
-        for j in 0..W {
-            if j == (W / 2 - i) || j == (W / 2 + i) {
-                result.push('*');
-            } else {
-                result.push(' ');
-            }
-        }
-        result.push('\n');
-    }
-
-    // Виводимо результат
-    print!("{}", result);
+    print!("{}", output);
 }
